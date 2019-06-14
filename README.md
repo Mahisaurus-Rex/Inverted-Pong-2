@@ -1,4 +1,4 @@
-# Pygame-Pong-Object-Oriented
-a modified version of my original Pygame Pong in object oriented so I could get some practice in. 
+Pong but one player plays as the ball and the other plays as the paddles
 
-/* Unfinished(collision doesn't work)*/
+Paddle control: Up:W Down: S
+Ball control: Up: (up key) Down: (down key)
