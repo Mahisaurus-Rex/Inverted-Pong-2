@@ -31,17 +31,18 @@ while not done:
     pressed=pygame.key.get_pressed()
     
     #controls
-    #p1
+    #paddles
     if pressed[pygame.K_w]:
         p1.up()
+        p2.up()
     if pressed[pygame.K_s]:
         p1.down()
-    #p2
-    if pressed[pygame.K_UP]:
-        p2.up()
-    if pressed[pygame.K_DOWN]:
         p2.down()
-
+    #ball
+    if pressed[pygame.K_UP]:
+        ball.up()
+    if pressed[pygame.K_DOWN]:
+        ball.down()
     #make players and ball
     screen.fill((0,0,0))
     score = myfont.render(str(p1_score)+" "+str(p2_score), True, (255,255,255))

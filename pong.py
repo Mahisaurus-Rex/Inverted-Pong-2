@@ -57,17 +57,22 @@ class Ball:
             self.x,self.y=((screen.get_width())/2),((screen.get_height())/2)
             time.sleep(1)
         #collision
-        if self.rect.colliderect(p1.rect) or self.rect.colliderect(p2.rect):
-            self.col()
+        if self.rect.colliderect(p1.rect): self.col(p1) 
+        if self.rect.colliderect(p2.rect): self.col(p2)
         self.player=pygame.draw.rect(screen, (255,255,255), pygame.Rect(self.x,self.y,paddle_width,paddle_width))
         self.rect = pygame.Rect(self.x,self.y,paddle_width,paddle_width)
-    def col(self):
+    def col(self,obj):
+        if self.slope_x > 0: # Moving right; Hit the left side of the paddle
+            self.rect.right = obj.rect.left
+        if self.slope_x < 0: # Moving left; Hit the right side of the paddle
+            self.rect.left = obj.rect.right
+       
         self.slope_x*=-1
         if self.slope_y>0:
             self.slope_y=random.randint(1,3) * -1
         else:
             self.slope_y=random.randint(1,3)
-        self.x+=(self.slope_x*3)
+        self.x+=(self.slope_x*2)
         self.y+=self.slope_y
 
 
@@ -78,6 +83,7 @@ p2=Paddle(p2_x,p2_y)
 ball=Ball(ball_x,ball_y)
 
 #main loop
+'''
 while not done:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -105,3 +111,4 @@ while not done:
     ball.draw()
 
     pygame.display.flip()
+    '''
