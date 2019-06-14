@@ -22,15 +22,19 @@ class Paddle:
         self.y=y
         self.player=pygame.draw.rect(screen, (255,255,255), pygame.Rect(self.x,self.y,paddle_width,paddle_height))
         self.rect=pygame.Rect(self.x,self.y,paddle_width,paddle_height)
+
+        #macros
+        self.paddle_speed=3
+
     def draw(self):
         self.player=pygame.draw.rect(screen, (255,255,255), pygame.Rect(self.x,self.y,paddle_width,paddle_height))
         self.rect=pygame.Rect(self.x,self.y,paddle_width,paddle_height)
     def up(self):
         if self.y>0:
-            self.y-=3
+            self.y-=self.paddle_speed
     def down(self):
-        if self.y<screen.get_height()-200: 
-            self.y+=3
+        if self.y<screen.get_height()-paddle_height: 
+            self.y+=self.paddle_speed
 #define ball class
 class Ball:
     def __init__(self,x,y):
@@ -40,10 +44,13 @@ class Ball:
         self.slope_y=slope_y
         self.ball=pygame.draw.rect(screen, (255,255,255), pygame.Rect(self.x,self.y,paddle_width,paddle_width))
         self.rect = pygame.Rect(self.x,self.y,paddle_width,paddle_width)
+
+        #macros
+        self.ball_speed=1.2
+
     def draw(self):
         #make ball movement
         self.x+=self.slope_x
-        self.y+=self.slope_y
         if self.y <= 0 or self.y >= (screen.get_height()):
             self.slope_y*=-1
         if self.x <= 0:
@@ -74,6 +81,12 @@ class Ball:
             self.slope_y=random.randint(1,3)
         self.x+=(self.slope_x*2)
         self.y+=self.slope_y
+    def up(self):
+        if self.y>0:
+            self.y-=self.ball_speed
+    def down(self):
+        if self.y<screen.get_height()-paddle_width: 
+            self.y+=self.ball_speed
 
 
 #set initial conditions
