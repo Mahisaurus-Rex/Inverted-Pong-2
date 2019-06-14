@@ -31,12 +31,14 @@ while not done:
     pressed=pygame.key.get_pressed()
     
     #controls
-    #p1
+    #paddles
     if pressed[pygame.K_w]:
         p1.up()
+        p2.up()
     if pressed[pygame.K_s]:
         p1.down()
-    #p2
+        p2.down()
+    #ball
     if pressed[pygame.K_UP]:
         p2.up()
     if pressed[pygame.K_DOWN]:
