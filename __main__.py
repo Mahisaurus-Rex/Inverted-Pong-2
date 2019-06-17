@@ -46,7 +46,7 @@ while not done:
         ball.down()
     #make players and ball
     screen.fill((0,0,0))
-    score = myfont.render(str(p1_score)+" "+str(p2_score), True, (255,255,255))
+    score = myfont.render(ball.getScore(), True, (255,255,255))
     screen.blit(score, ((screen.get_width()/2)-20,0))
     p1.draw()
     p2.draw()
