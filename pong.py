@@ -64,16 +64,19 @@ class Ball:
             self.x,self.y=((screen.get_width())/2),((screen.get_height())/2)
             time.sleep(1)
         #collision
+        self.rect = pygame.Rect(self.x,self.y,paddle_width,paddle_width)
         if self.rect.colliderect(p1.rect): self.col(p1) 
         if self.rect.colliderect(p2.rect): self.col(p2)
         self.player=pygame.draw.rect(screen, (255,255,255), pygame.Rect(self.x,self.y,paddle_width,paddle_width))
         self.rect = pygame.Rect(self.x,self.y,paddle_width,paddle_width)
+
     def col(self,obj):
+
         if self.slope_x > 0: # Moving right; Hit the left side of the paddle
             self.rect.right = obj.rect.left
         if self.slope_x < 0: # Moving left; Hit the right side of the paddle
             self.rect.left = obj.rect.right
-       
+
         self.slope_x*=-1
         if self.slope_y>0:
             self.slope_y=random.randint(1,3) * -1
@@ -96,7 +99,7 @@ p2=Paddle(p2_x,p2_y)
 ball=Ball(ball_x,ball_y)
 
 #main loop
-'''
+
 while not done:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -104,16 +107,18 @@ while not done:
     pressed=pygame.key.get_pressed()
     
     #controls
-    #p1
+    #paddles
     if pressed[pygame.K_w]:
         p1.up()
+        p2.up()
     if pressed[pygame.K_s]:
         p1.down()
-    #p2
-    if pressed[pygame.K_UP]:
-        p2.up()
-    if pressed[pygame.K_DOWN]:
         p2.down()
+    #ball
+    if pressed[pygame.K_UP]:
+        ball.up()
+    if pressed[pygame.K_DOWN]:
+        ball.down()
 
     #make players and ball
     screen.fill((0,0,0))
@@ -124,4 +129,3 @@ while not done:
     ball.draw()
 
     pygame.display.flip()
-    '''
