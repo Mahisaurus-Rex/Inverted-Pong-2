@@ -12,6 +12,7 @@ p1_x,p1_y=30,30
 p2_x,p2_y=(screen.get_width()-60),30
 ball_x,ball_y=((screen.get_width())/2),((screen.get_height())/2)
 slope_x,slope_y=2,2
+paddle_score=0
 #set constants
 paddle_width = screen.get_width()/64
 paddle_height = screen.get_height()/3.6
@@ -44,7 +45,8 @@ class Ball:
         self.slope_y=slope_y
         self.ball=pygame.draw.rect(screen, (255,255,255), pygame.Rect(self.x,self.y,paddle_width,paddle_width))
         self.rect = pygame.Rect(self.x,self.y,paddle_width,paddle_width)
-
+        self.ball_score=0
+        self.paddle_score=0
         #macros
         self.ball_speed=1.2
 
@@ -55,12 +57,12 @@ class Ball:
             self.slope_y*=-1
         if self.x <= 0:
             self.slope_x*=-1
-            #p2_score+=1
+            self.ball_score+=1
             self.x,self.y=((screen.get_width())/2),((screen.get_height())/2)
             time.sleep(1)
         if self.x >= (screen.get_width()):
             self.slope_x*=-1
-            #p1_score+=1
+            self.ball_score+=1
             self.x,self.y=((screen.get_width())/2),((screen.get_height())/2)
             time.sleep(1)
         #collision
@@ -76,7 +78,7 @@ class Ball:
             self.rect.right = obj.rect.left
         if self.slope_x < 0: # Moving left; Hit the right side of the paddle
             self.rect.left = obj.rect.right
-
+        self.paddle_score+=1
         self.slope_x*=-1
         if self.slope_y>0:
             self.slope_y=random.randint(1,3) * -1

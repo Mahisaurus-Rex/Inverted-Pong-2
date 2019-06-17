@@ -1,7 +1,7 @@
 import pygame
 import time
 import random
-from pong import *
+from pong import Paddle, Ball
 
 pygame.init()
 pygame.font.init()
@@ -22,6 +22,7 @@ p1_score,p2_score=0,0
 p1=Paddle(p1_x,p1_y)
 p2=Paddle(p2_x,p2_y)
 ball=Ball(ball_x,ball_y)
+paddle_score=0
 
 #main loop
 while not done:
